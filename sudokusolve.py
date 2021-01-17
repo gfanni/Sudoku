@@ -1,32 +1,20 @@
 import numpy as np
 
-sudoku_matrix = np.array([[[1, 2, 3],
-                           [4, 5, 6],
-                           [7, 8, 9]],
-                          [[1, 2, 3], [4, 5, 6], [7, 8, 9]],
-                          [[1, 2, 3], [4, 5, 6], [7, 8, 9]],
-                          [[1, 2, 3], [4, 5, 6], [7, 8, 9]],
-                          [[1, 2, 3], [4, 5, 6], [7, 8, 9]],
-                          [[1, 2, 3], [4, 5, 6], [7, 8, 9]],
-                          [[1, 2, 3], [4, 5, 6], [7, 8, 9]],
-                          [[1, 2, 3], [4, 5, 6], [7, 8, 9]],
-                          [[1, 2, 3], [4, 5, 6], [7, 8, 9]],
-                          ])
+sudoku_matrix = np.array([[1, 2, 3, 4, 5, 6, 7, 8, 9], [1, 2, 3, 4, 5, 6, 7, 8, 9], [1, 2, 3, 4, 5, 6, 7, 8, 9],
+                        [1, 2, 3, 4, 5, 6, 7, 8, 9], [1, 2, 3, 4, 5, 6, 7, 8, 9], [1, 2, 3, 4, 5, 6, 7, 8, 9],
+                        [1, 2, 3, 4, 5, 6, 7, 8, 9], [1, 2, 3, 4, 5, 6, 7, 8, 9], [1, 2, 3, 4, 5, 6, 7, 8, 9]])
 
-#print(sudoku_matrix)
-#print(sudoku_matrix.ndim)
+print(sudoku_matrix)
+print(sudoku_matrix.ndim)
 
 def print_sudoku(sudoku_matrix):
     counter_box = 0
-    for one_box in sudoku_matrix:
-        #print(one_box)
-        for short_row in one_box:
-            #print(short_row)
-            for element in short_row:
-                print(element)
-                #counter_box += 1
-            #for element in one_row:
-                #print('')
+    for row in sudoku_matrix:
+        print(row)
+        for element in row:
+            print(element)
+            counter_box += 1
+            print('')
 
 #print_sudoku(sudoku_matrix)
 
@@ -38,7 +26,7 @@ def print_sudoku2(sudoku_matrix):
 
 #print_sudoku2(sudoku_matrix)
 
-print(sudoku_matrix[0, :, :])
+print(sudoku_matrix[0, :])
 
 #for idx, x in np.ndenumerate(sudoku_matrix):
 #print(idx, x)
@@ -72,4 +60,3 @@ def create_table(sudoku_text):
             for row in matrix[row_num, :, :]:
                 for number in row:
                     number = number + element
-
