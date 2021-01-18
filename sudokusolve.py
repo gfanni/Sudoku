@@ -78,8 +78,22 @@ def check_column(matrix, index):
     print(possible_nums)
     return possible_nums
 
-def check_square(element):
-    return 0
+def check_square(matrix, index):
+    possible_nums = {1, 2, 3, 4, 5, 6, 7, 8, 9}
+    box_len = [[0, 1, 2], [3, 4, 5], [6, 7, 8]]
+    row =  -1
+    column = -1
+    for box_side in box_len:
+        if index[0] in box_side:
+            row = box_side
+        if index[1] in box_side:
+            column = box_side
+    for side in row:
+        for idx in column:
+            possible_nums.discard(matrix[side][idx])
+    print(possible_nums)
+    return possible_nums
+
 
 def solve_sudoku(sudoku_text):
     sudoku_matrix = create_table(sudoku_text)
@@ -97,4 +111,4 @@ index = find_empty(sudoku_matrix)
 
 check_row(sudoku_matrix, index)
 check_column(sudoku_matrix, index)
-
+check_square(sudoku_matrix, index)
