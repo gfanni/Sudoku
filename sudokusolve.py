@@ -2,10 +2,11 @@ import numpy as np
 
 sudoku_matrix = np.array([[1, 2, 3, 4, 5, 6, 7, 8, 9], [1, 2, 3, 4, 5, 6, 7, 8, 9], [1, 2, 3, 4, 5, 6, 7, 8, 9],
                         [1, 2, 3, 4, 5, 6, 7, 8, 9], [1, 2, 3, 4, 5, 6, 7, 8, 9], [1, 2, 3, 4, 5, 6, 7, 8, 9],
-                        [1, 2, 3, 4, 5, 6, 7, 8, 9], [1, 2, 3, 4, 5, 6, 7, 8, 9], [1, 2, 3, 4, 5, 6, 7, 8, 9]])
+                        [1, 2, 3, 4, 5, 6, 7, 8, 9], [1, 2, 3, 4, 5, 6, 7, 8, 9], [1, 2, 3, 4, 5, 6, 7, 8, 9],
+                        ])
 
-print(sudoku_matrix)
-print(sudoku_matrix.ndim)
+#print(sudoku_matrix)
+#print(sudoku_matrix.ndim)
 
 def print_sudoku(sudoku_matrix):
     counter_box = 0
@@ -18,45 +19,46 @@ def print_sudoku(sudoku_matrix):
 
 #print_sudoku(sudoku_matrix)
 
-
-def print_sudoku2(sudoku_matrix):
-    for three_squares in sudoku_matrix:
-        print(three_squares)
-        print(", ")
-
-#print_sudoku2(sudoku_matrix)
-
-print(sudoku_matrix[0, :])
+#print(sudoku_matrix[8, :])
 
 #for idx, x in np.ndenumerate(sudoku_matrix):
 #print(idx, x)
 
-strnum = ""
-counter = 0
-counter_row = 0
 
-for sth in range(0,9):
-    print(sth)
-    counter_row += 1
-    if counter_row%3 == 0:
-        strnum += "\n"
-    for i in sudoku_matrix[sth, :, :]:
-        for k in i:
-            strnum += str(k)
+
+def print_sudoku(sudoku_matrix):
+    strnum = ""
+    counter = 0
+    counter_row = 0
+    for row in sudoku_matrix:
+        counter_row += 1
+        for element in row:
+            strnum += str(int(element))
+            strnum += " "
             counter += 1
             if counter%3 == 0:
-                strnum += " "
+                strnum += " | "
+        if counter_row%3 == 0:
+            strnum += "\n ------------------------- \n"
+        else:
+            strnum += "\n"
     print(strnum)
 
-
-
-#print(matrix)
-#print(matrix.ndim)
+# print_sudoku(sudoku_matrix)
 
 def create_table(sudoku_text):
-    matrix = np.zeros((9, 3, 3))
-    for element in sudoku_text:
-        for row_num in range(0,9):
-            for row in matrix[row_num, :, :]:
-                for number in row:
-                    number = number + element
+    sudoku_matrix = np.zeros((9, 9))
+    x = 0
+    y = 0
+    for number in sudoku_text:
+        sudoku_matrix[y, x] = int(number)
+        x += 1
+        if x > 8:
+            y += 1
+            x = 0
+    print(sudoku_matrix)
+    print_sudoku(sudoku_matrix)
+
+sudoku_text = "004006079000000602056092300078061030509000406020540890007410920105000000840600100"
+
+create_table(sudoku_text)
