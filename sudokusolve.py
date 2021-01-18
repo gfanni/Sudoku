@@ -44,7 +44,7 @@ def print_sudoku(sudoku_matrix):
             strnum += "\n"
     print(strnum)
 
-# print_sudoku(sudoku_matrix)
+
 
 def create_table(sudoku_text):
     sudoku_matrix = np.zeros((9, 9))
@@ -58,7 +58,19 @@ def create_table(sudoku_text):
             x = 0
     print(sudoku_matrix)
     print_sudoku(sudoku_matrix)
+    return sudoku_matrix
 
 sudoku_text = "004006079000000602056092300078061030509000406020540890007410920105000000840600100"
 
-create_table(sudoku_text)
+# create_table(sudoku_text)
+
+def check_row(element):
+
+def check_column(element):
+
+def check_square(element):
+
+def solve_sudoku(sudoku_text):
+    sudoku_matrix = create_table(sudoku_text)
+
+
