@@ -1,8 +1,8 @@
 import numpy as np
 
-sudoku_matrix = np.array([[1, 2, 3, 4, 5, 6, 7, 8, 9], [1, 2, 3, 4, 5, 6, 7, 8, 9], [1, 2, 3, 4, 5, 6, 7, 8, 9],
+sudoku_matrix_try = np.array([[1, 0, 3, 4, 5, 6, 7, 8, 9], [1, 2, 3, 4, 5, 6, 7, 8, 9], [1, 2, 3, 4, 5, 6, 7, 8, 9],
                         [1, 2, 3, 4, 5, 6, 7, 8, 9], [1, 2, 3, 4, 5, 6, 7, 8, 9], [1, 2, 3, 4, 5, 6, 7, 8, 9],
-                        [1, 2, 3, 4, 5, 6, 7, 8, 9], [1, 2, 3, 4, 5, 6, 7, 8, 9], [1, 2, 3, 4, 5, 6, 7, 8, 9],
+                        [1, 0, 3, 4, 5, 6, 7, 8, 9], [1, 2, 3, 4, 5, 6, 7, 8, 9], [1, 2, 3, 4, 5, 6, 7, 8, 9],
                         ])
 
 #print(sudoku_matrix)
@@ -62,15 +62,39 @@ def create_table(sudoku_text):
 
 sudoku_text = "004006079000000602056092300078061030509000406020540890007410920105000000840600100"
 
-# create_table(sudoku_text)
+sudoku_matrix = create_table(sudoku_text)
 
-def check_row(element):
+def check_row(matrix, index):
+    possible_nums = {1, 2, 3, 4, 5, 6, 7, 8, 9}
+    for element in matrix[index[0]]:
+         possible_nums.discard(element)
+    print(possible_nums)
+    return possible_nums
 
-def check_column(element):
+def check_column(matrix, index):
+    possible_nums = {1, 2, 3, 4, 5, 6, 7, 8, 9}
+    for row in range(0,9):
+            possible_nums.discard(matrix[row][index[1]])
+    print(possible_nums)
+    return possible_nums
 
 def check_square(element):
+    return 0
 
 def solve_sudoku(sudoku_text):
     sudoku_matrix = create_table(sudoku_text)
+    return 0
 
+def find_empty(sudoku_matrix):
+    # finding empty cells with 0 values
+    for idx, row in enumerate(sudoku_matrix):
+        for ind, empty_cell in enumerate(row):
+            if empty_cell == 0:
+                return [idx, ind]
+
+index = find_empty(sudoku_matrix)
+#print(index)
+
+check_row(sudoku_matrix, index)
+check_column(sudoku_matrix, index)
 
