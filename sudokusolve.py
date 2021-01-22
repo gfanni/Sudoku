@@ -1,4 +1,5 @@
 import numpy as np
+import random
 
 sudoku_matrix_try = np.array([[1, 0, 3, 4, 5, 6, 7, 8, 9], [1, 2, 3, 4, 5, 6, 7, 8, 9], [1, 2, 3, 4, 5, 6, 7, 8, 9],
                         [1, 2, 3, 4, 5, 6, 7, 8, 9], [1, 2, 3, 4, 5, 6, 7, 8, 9], [1, 2, 3, 4, 5, 6, 7, 8, 9],
@@ -62,26 +63,26 @@ def create_table(sudoku_text):
 
 sudoku_text = "004006079000000602056092300078061030509000406020540890007410920105000000840600100"
 
-sudoku_matrix = create_table(sudoku_text)
+sudoku_matrix1 = create_table(sudoku_text)
 
 def check_row(matrix, index):
     possible_nums = {1, 2, 3, 4, 5, 6, 7, 8, 9}
     for element in matrix[index[0]]:
          possible_nums.discard(element)
-    print(possible_nums)
+    #print(possible_nums)
     return possible_nums
 
 def check_column(matrix, index):
     possible_nums = {1, 2, 3, 4, 5, 6, 7, 8, 9}
     for row in range(0,9):
             possible_nums.discard(matrix[row][index[1]])
-    print(possible_nums)
+    #print(possible_nums)
     return possible_nums
 
 def check_square(matrix, index):
     possible_nums = {1, 2, 3, 4, 5, 6, 7, 8, 9}
     box_len = [[0, 1, 2], [3, 4, 5], [6, 7, 8]]
-    row =  -1
+    row = -1
     column = -1
     for box_side in box_len:
         if index[0] in box_side:
@@ -91,24 +92,46 @@ def check_square(matrix, index):
     for side in row:
         for idx in column:
             possible_nums.discard(matrix[side][idx])
-    print(possible_nums)
+    #print(possible_nums)
     return possible_nums
 
+sudoku_matrix = create_table(sudoku_text)
 
-def solve_sudoku(sudoku_text):
-    sudoku_matrix = create_table(sudoku_text)
-    return 0
+def solve_sudoku(matrix):
+    if not find_empty(matrix):
+        print_sudoku(matrix)
+        return "Solved"
+    else:
+        index = find_empty(matrix)
+    col = check_column(matrix, index)
+    square = check_square(matrix, index)
+    row = check_row(matrix, index)
+    possible_nums = col.intersection(square, row)
+    print(len(possible_nums))
+    if len(possible_nums) == 1:
+        one_el = random.choices(tuple(possible_nums))
+        matrix[index[0],index[1]] = one_el[0]
+    else:
+        one_element = random.choices(tuple(possible_nums))
+        possible_nums.discard(one_element[0])
+        matrix[index[0], index[1]] = one_element[0]
+        return
 
-def find_empty(sudoku_matrix):
-    # finding empty cells with 0 values
-    for idx, row in enumerate(sudoku_matrix):
+
+def find_empty(matrix):
+    # finding empty cells with 0 values and get its index
+    for idx, row in enumerate(matrix):
         for ind, empty_cell in enumerate(row):
             if empty_cell == 0:
                 return [idx, ind]
+    return False
 
-index = find_empty(sudoku_matrix)
+
+solve_sudoku(sudoku_matrix)
+
+#index = find_empty(sudoku_matrix)
 #print(index)
 
-check_row(sudoku_matrix, index)
-check_column(sudoku_matrix, index)
-check_square(sudoku_matrix, index)
+#check_row(sudoku_matrix, index)
+#check_column(sudoku_matrix, index)
+#check_square(sudoku_matrix, index)
