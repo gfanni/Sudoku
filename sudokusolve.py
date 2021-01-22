@@ -6,9 +6,6 @@ sudoku_matrix_try = np.array([[1, 0, 3, 4, 5, 6, 7, 8, 9], [1, 2, 3, 4, 5, 6, 7,
                         [1, 0, 3, 4, 5, 6, 7, 8, 9], [1, 2, 3, 4, 5, 6, 7, 8, 9], [1, 2, 3, 4, 5, 6, 7, 8, 9],
                         ])
 
-#print(sudoku_matrix)
-#print(sudoku_matrix.ndim)
-
 def print_sudoku(sudoku_matrix):
     counter_box = 0
     for row in sudoku_matrix:
@@ -17,15 +14,6 @@ def print_sudoku(sudoku_matrix):
             print(element)
             counter_box += 1
             print('')
-
-#print_sudoku(sudoku_matrix)
-
-#print(sudoku_matrix[8, :])
-
-#for idx, x in np.ndenumerate(sudoku_matrix):
-#print(idx, x)
-
-
 
 def print_sudoku(sudoku_matrix):
     strnum = ""
@@ -45,8 +33,6 @@ def print_sudoku(sudoku_matrix):
             strnum += "\n"
     print(strnum)
 
-
-
 def create_table(sudoku_text):
     sudoku_matrix = np.zeros((9, 9))
     x = 0
@@ -62,8 +48,7 @@ def create_table(sudoku_text):
     return sudoku_matrix
 
 sudoku_text = "004006079000000602056092300078061030509000406020540890007410920105000000840600100"
-
-sudoku_matrix1 = create_table(sudoku_text)
+sudoku_text2 = "000000000000000000000000000000000000000000000000000000000000000000000000000000000"
 
 def check_row(matrix, index):
     possible_nums = {1, 2, 3, 4, 5, 6, 7, 8, 9}
@@ -97,36 +82,7 @@ def check_square(matrix, index):
 
 sudoku_matrix = create_table(sudoku_text)
 
-def solve_sudoku(matrix):
-    if not find_empty(matrix):
-        print_sudoku(matrix)
-        return "Solved"
-    else:
-        index = find_empty(matrix)
-    col = check_column(matrix, index)
-    square = check_square(matrix, index)
-    row = check_row(matrix, index)
-    possible_nums = col.intersection(square, row)
-    print(len(possible_nums))
-    if len(possible_nums) == 1:
-        one_el = random.choices(tuple(possible_nums))
-        matrix[index[0],index[1]] = one_el[0]
-    else:
-        one_element = random.choices(tuple(possible_nums))
-        possible_nums.discard(one_element[0])
-        matrix[index[0], index[1]] = one_element[0]
-        return
-
-
-def find_empty(matrix):
-    # finding empty cells with 0 values and get its index
-    for idx, row in enumerate(matrix):
-        for ind, empty_cell in enumerate(row):
-            if empty_cell == 0:
-                return [idx, ind]
-    return False
-
-# trying to solve it with recursion
+# solve it with recursion
 def solve_sudoku_rec(matrix):
     for idx, row in enumerate(matrix):
         for ind, element in enumerate(row):
@@ -144,17 +100,4 @@ def solve_sudoku_rec(matrix):
     print_sudoku(matrix)
     return
 
-
 solve_sudoku_rec(sudoku_matrix)
-
-
-
-#solve_sudoku(sudoku_matrix)
-
-
-#index = find_empty(sudoku_matrix)
-#print(index)
-
-#check_row(sudoku_matrix, index)
-#check_column(sudoku_matrix, index)
-#check_square(sudoku_matrix, index)
