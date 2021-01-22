@@ -126,8 +126,31 @@ def find_empty(matrix):
                 return [idx, ind]
     return False
 
+# trying to solve it with recursion
+def solve_sudoku_rec(matrix):
+    for idx, row in enumerate(matrix):
+        for ind, element in enumerate(row):
+            if element == 0:
+                col = check_column(matrix, index=[idx, ind])
+                ro = check_row(matrix, index=[idx, ind])
+                sq = check_square(matrix, index=[idx, ind])
+                possible_nums = col.intersection(sq, ro)
+                if len(possible_nums) >= 0:
+                    for try_element in possible_nums:
+                        matrix[idx, ind] = try_element
+                        solve_sudoku_rec(matrix)
+                        matrix[idx][ind] = 0
+                    return
+    print_sudoku(matrix)
+    return
 
-solve_sudoku(sudoku_matrix)
+
+solve_sudoku_rec(sudoku_matrix)
+
+
+
+#solve_sudoku(sudoku_matrix)
+
 
 #index = find_empty(sudoku_matrix)
 #print(index)
