@@ -1,19 +1,9 @@
 import numpy as np
-import random
 
 sudoku_matrix_try = np.array([[1, 0, 3, 4, 5, 6, 7, 8, 9], [1, 2, 3, 4, 5, 6, 7, 8, 9], [1, 2, 3, 4, 5, 6, 7, 8, 9],
                         [1, 2, 3, 4, 5, 6, 7, 8, 9], [1, 2, 3, 4, 5, 6, 7, 8, 9], [1, 2, 3, 4, 5, 6, 7, 8, 9],
                         [1, 0, 3, 4, 5, 6, 7, 8, 9], [1, 2, 3, 4, 5, 6, 7, 8, 9], [1, 2, 3, 4, 5, 6, 7, 8, 9],
                         ])
-
-def print_sudoku(sudoku_matrix):
-    counter_box = 0
-    for row in sudoku_matrix:
-        print(row)
-        for element in row:
-            print(element)
-            counter_box += 1
-            print('')
 
 def print_sudoku(sudoku_matrix):
     strnum = ""
@@ -54,14 +44,12 @@ def check_row(matrix, index):
     possible_nums = {1, 2, 3, 4, 5, 6, 7, 8, 9}
     for element in matrix[index[0]]:
          possible_nums.discard(element)
-    #print(possible_nums)
     return possible_nums
 
 def check_column(matrix, index):
     possible_nums = {1, 2, 3, 4, 5, 6, 7, 8, 9}
     for row in range(0,9):
             possible_nums.discard(matrix[row][index[1]])
-    #print(possible_nums)
     return possible_nums
 
 def check_square(matrix, index):
@@ -77,10 +65,12 @@ def check_square(matrix, index):
     for side in row:
         for idx in column:
             possible_nums.discard(matrix[side][idx])
-    #print(possible_nums)
     return possible_nums
 
-sudoku_matrix = create_table(sudoku_text)
+def sudoku_SDM(matrix):
+    for row in matrix:
+        for element in row:
+
 
 # solve it with recursion
 def solve_sudoku_rec(matrix):
@@ -100,4 +90,5 @@ def solve_sudoku_rec(matrix):
     print_sudoku(matrix)
     return
 
+sudoku_matrix = create_table(sudoku_text)
 solve_sudoku_rec(sudoku_matrix)
