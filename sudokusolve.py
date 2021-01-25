@@ -2,38 +2,38 @@ import numpy as np
 
 
 # visualize the sudoku table
-def print_sudoku(sudoku_matrix):
-    strnum = ""
+def print_sudoku(matrix):
+    str_num = ""
     counter = 0
     counter_row = 0
-    for row in sudoku_matrix:
+    for row in matrix:
         counter_row += 1
         for element in row:
-            strnum += str(int(element))
-            strnum += " "
+            str_num += str(int(element))
+            str_num += " "
             counter += 1
             if counter % 3 == 0:
-                strnum += " | "
+                str_num += " | "
         if counter_row % 3 == 0:
-            strnum += "\n-------------------------- \n"
+            str_num += "\n-------------------------- \n"
         else:
-            strnum += "\n"
-    print(strnum)
+            str_num += "\n"
+    print(str_num)
 
 
 # convert SDM format into a 2D matrix
-def create_table(sudoku_text):
-    sudoku_matrix = np.zeros((9, 9))
+def create_table(input_sdm):
+    matrix = np.zeros((9, 9))
     x = 0
     y = 0
-    for number in sudoku_text:
-        sudoku_matrix[y, x] = int(number)
+    for number in input_sdm:
+        matrix[y, x] = int(number)
         x += 1
         if x > 8:
             y += 1
             x = 0
-    print_sudoku(sudoku_matrix)
-    return sudoku_matrix
+    print_sudoku(matrix)
+    return matrix
 
 
 # find the numbers that could be correct according to the rules (row, column and square)
@@ -107,6 +107,7 @@ def solve_sudoku_rec(matrix):
 
     # we return when when we checked all empty spaces and could fill it with the possible number
     return sdm
+
 
 sudoku_text = "004006079000000602056092300078061030509000406020540890007410920105000000840600100"
 
